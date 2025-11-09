@@ -68,6 +68,16 @@ MCP server implementing spec-driven development for course and workshop creation
 │   └── roadmap/            # Development roadmap
 └── SKILL-TEMPLATE.md        # Template for new skills
 
+registry/                    # Provider registry and base classes (not Claude Code skills)
+├── BaseContentSkill.js      # Abstract base for content providers
+├── GammaAISkill.js         # Gamma AI presentation provider
+├── GammaAISkill.test.js
+├── ImplementationCoachSkill.js  # Provider routing and selection
+├── ImplementationCoachSkill.test.js
+├── ProviderRegistry.js     # Provider management system
+├── ProviderRegistry.test.js
+└── README.md
+
 index.js                     # MCP server implementation
 setup.sh                     # Environment setup script
 README.md                    # Project overview
@@ -83,15 +93,23 @@ README.md                    # Project overview
 
 Each tool reads context from previous phases in `.coursekit/` directory.
 
-## Skills vs MCP Tools
+## Architecture Overview
 
-**MCP Tools** provide the actual course generation functionality. They're thin-slice implementations that would integrate with LLM APIs in production.
+### MCP Tools
+Provide the actual course generation functionality. Thin-slice implementations that integrate with LLM APIs.
 
-**Claude Code Skills** enhance the user experience by:
-- Asking clarifying questions before calling MCP tools
-- Gathering better input through conversation
-- Ensuring context-aware tool usage
-- Providing specialized content generation capabilities
+### Claude Code Skills (`.claude/skills/`)
+Enhance user experience by asking clarifying questions and gathering better context before calling MCP tools.
+
+### Provider Registry (`registry/`)
+**Important distinction**: The `registry/` directory contains provider implementations and management code (BaseContentSkill, GammaAISkill, ImplementationCoachSkill, ProviderRegistry), NOT Claude Code skills.
+
+- **BaseContentSkill.js** - Abstract base class for all content providers
+- **GammaAISkill.js** - Gamma AI API integration for presentations
+- **ImplementationCoachSkill.js** - Provider selection and routing
+- **ProviderRegistry.js** - Provider lifecycle management
+
+These are JavaScript classes that implement content generation, while Claude Code skills (in `.claude/skills/`) are markdown-based conversation guides.
 
 ### Workflow Skills (1:1 with MCP Tools)
 

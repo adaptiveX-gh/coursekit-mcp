@@ -1,16 +1,24 @@
-# CourseKit Skills
+# CourseKit Provider Registry
 
-Content generation skills for CourseKit MCP Server.
+Provider registry and base classes for CourseKit MCP Server content generation.
 
 ## Overview
 
-Skills are classes that implement specific content generation capabilities. Each skill extends `BaseContentSkill` and provides specialized functionality for creating different types of content (presentations, documents, etc.).
+This directory contains the provider registry system and base classes for content generation. These are JavaScript implementations, NOT Claude Code skills (which are in `.claude/skills/`).
 
-## Available Skills
+**Key Components:**
+- **BaseContentSkill** - Abstract base class for all content providers
+- **GammaAISkill** - Gamma AI API integration for presentations
+- **ImplementationCoachSkill** - Provider selection and routing logic
+- **ProviderRegistry** - Provider lifecycle management
+
+Each provider class extends `BaseContentSkill` and provides specialized functionality for creating different types of content (presentations, documents, etc.).
+
+## Available Providers
 
 ### GammaAISkill
 
-AI-powered presentation generation using Gamma AI.
+AI-powered presentation generation using Gamma AI API.
 
 **Capabilities:**
 - Automatic slide generation from CourseKit content
@@ -45,15 +53,15 @@ See [GammaAISkill Documentation](./GAMMA-AI-SKILL.md) for detailed information.
 
 ## Base Class: BaseContentSkill
 
-All skills extend the `BaseContentSkill` abstract base class.
+All content providers extend the `BaseContentSkill` abstract base class.
 
 ### Required Methods
 
-Skills must implement these methods:
+Providers must implement these methods:
 
 ```javascript
-class MySkill extends BaseContentSkill {
-  // Initialize skill with API keys, config, etc.
+class MyProvider extends BaseContentSkill {
+  // Initialize provider with API keys, config, etc.
   async initialize(options) { }
 
   // Gather requirements from user
@@ -73,22 +81,22 @@ BaseContentSkill provides these methods:
 
 - `setProgressCallback(callback)` - Set progress reporting callback
 - `reportProgress(stage, progress, message)` - Report progress
-- `getCapabilities()` - Get skill capabilities
+- `getCapabilities()` - Get provider capabilities
 - `supports(contentType)` - Check if content type is supported
-- `getMetadata()` - Get skill metadata
+- `getMetadata()` - Get provider metadata
 - `handleError(error, operation, fallbackOptions)` - Handle errors
 - `cleanup()` - Clean up resources
 
-## Creating a New Skill
+## Creating a New Provider
 
-### 1. Create the Skill Class
+### 1. Create the Provider Class
 
 ```javascript
 import { BaseContentSkill, SkillError } from './BaseContentSkill.js';
 
-export class MySkill extends BaseContentSkill {
+export class MyProvider extends BaseContentSkill {
   constructor(config = {}) {
-    super('my-skill', {
+    super('my-provider', {
       contentTypes: ['my-content-type'],
       formats: ['format1', 'format2'],
       features: ['feature1', 'feature2'],
@@ -140,22 +148,22 @@ export class MySkill extends BaseContentSkill {
 ```javascript
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { MySkill } from './MySkill.js';
+import { MyProvider } from './MyProvider.js';
 
-describe('MySkill', () => {
+describe('MyProvider', () => {
   it('should initialize', async () => {
-    const skill = new MySkill();
-    await skill.initialize({ apiKey: 'test-key' });
-    assert.strictEqual(skill.initialized, true);
+    const provider = new MyProvider();
+    await provider.initialize({ apiKey: 'test-key' });
+    assert.strictEqual(provider.initialized, true);
   });
 
   // More tests...
 });
 ```
 
-### 3. Document the Skill
+### 3. Document the Provider
 
-Create a `MY-SKILL.md` file documenting:
+Create a `MY-PROVIDER.md` file documenting:
 - Purpose and capabilities
 - Installation and setup
 - Usage examples
@@ -163,27 +171,29 @@ Create a `MY-SKILL.md` file documenting:
 - Configuration options
 - Troubleshooting
 
-### 4. Register the Skill
+### 4. Register the Provider
 
-Add the skill to the configuration system in `config/providers.json`.
+Add the provider to the configuration system in `config/providers.json`.
 
 ## Testing
 
-Run all skill tests:
+Run all provider tests:
 
 ```bash
-npm test skills/*.test.js
+npm test registry/*.test.js
 ```
 
-Run specific skill tests:
+Run specific provider tests:
 
 ```bash
-node skills/GammaAISkill.test.js
+node registry/GammaAISkill.test.js
+node registry/ImplementationCoachSkill.test.js
+node registry/ProviderRegistry.test.js
 ```
 
 ## Error Handling
 
-Skills should use the `SkillError` class for skill-specific errors:
+Providers should use the `SkillError` class for provider-specific errors:
 
 ```javascript
 throw new SkillError(
@@ -195,7 +205,7 @@ throw new SkillError(
 ```
 
 Common error codes:
-- `NOT_INITIALIZED` - Skill not initialized
+- `NOT_INITIALIZED` - Provider not initialized
 - `MISSING_API_KEY` - API key not provided
 - `INVALID_PARAMETERS` - Invalid parameters
 - `GENERATION_FAILED` - Content generation failed
@@ -203,14 +213,14 @@ Common error codes:
 
 ## Progress Reporting
 
-Skills can report progress for long-running operations:
+Providers can report progress for long-running operations:
 
 ```javascript
 this.reportProgress('stage-name', 50, 'Processing...');
 ```
 
 Progress events include:
-- `skill` - Skill name
+- `skill` - Provider name
 - `stage` - Current stage
 - `progress` - Progress percentage (0-100)
 - `message` - Progress message
@@ -218,16 +228,16 @@ Progress events include:
 
 ## Fallback Support
 
-Skills can specify fallback skills for error scenarios:
+Providers can specify fallback providers for error scenarios:
 
 ```javascript
-await skill.initialize({
+await provider.initialize({
   apiKey: 'key',
-  fallbackSkill: 'alternative-skill'
+  fallbackSkill: 'alternative-provider'
 });
 ```
 
-When errors occur, skills can attempt fallback:
+When errors occur, providers can attempt fallback:
 
 ```javascript
 if (this.fallbackSkill && isRecoverable) {
@@ -276,20 +286,20 @@ if (this.fallbackSkill && isRecoverable) {
 
 ## Integration with CourseKit
 
-Skills integrate with CourseKit's workflow:
+Providers integrate with CourseKit's workflow:
 
 ```
-CourseKit Workflow        Skill Integration
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CourseKit Workflow        Provider Integration
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. constitution       →   Read course principles
 2. specify            →   Extract learning outcomes
 3. plan               →   Understand structure
 4. tasks              →   Identify content needs
-5. implement          →   Skills generate content
+5. implement          →   Providers generate content
 ```
 
-Skills receive context objects containing:
+Providers receive context objects containing:
 - `constitution` - Course principles and vision
 - `specification` - Learning outcomes and audience
 - `plan` - Module structure and timing
@@ -297,7 +307,7 @@ Skills receive context objects containing:
 
 ## Contributing
 
-When contributing new skills:
+When contributing new providers:
 
 1. Follow the `BaseContentSkill` interface
 2. Include comprehensive tests
@@ -305,6 +315,16 @@ When contributing new skills:
 4. Provide usage examples
 5. Add to `config/providers.json`
 6. Update this README
+
+## Important Distinction
+
+**This `registry/` directory** contains JavaScript provider implementations (BaseContentSkill, GammaAISkill, etc.).
+
+**The `.claude/skills/` directory** contains Claude Code skills (markdown-based conversation guides).
+
+These are two different systems that work together:
+- **Claude Code skills** gather context through conversation
+- **Provider registry** implements the actual content generation
 
 ## License
 

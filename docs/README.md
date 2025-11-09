@@ -57,7 +57,7 @@ When adding new documentation:
 - [CLAUDE.md](../../../CLAUDE.md) - Project instructions for Claude
 - [Config README](../../../config/README.md) - Configuration system
 - [Gamma README](../../../providers/gamma/README.md) - Gamma AI provider
-- [Skills README](../../../skills/README.md) - Skills overview
+- [Registry README](../../../registry/README.md) - Provider registry and base classes
 - [Test README](../../../test/README.md) - Testing documentation
 
 ## Statistics

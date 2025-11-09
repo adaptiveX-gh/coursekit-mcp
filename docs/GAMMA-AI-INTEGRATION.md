@@ -32,9 +32,13 @@ coursekit/
 │   ├── providers.json       # Provider configurations
 │   └── user-preferences.json # User overrides
 ├── mcp-server/
-├── skills/
+├── registry/                 # Provider implementations
+│   ├── BaseContentSkill.js
+│   ├── GammaAISkill.js
+│   ├── ImplementationCoachSkill.js
+│   └── ProviderRegistry.js
+├── .claude/skills/          # Claude Code skills (conversation guides)
 │   └── content-skills/
-│       ├── gamma-ai-skill/
 │       ├── slidev-skill/
 │       └── powerpoint-skill/
 └── .coursekit/              # Generated content

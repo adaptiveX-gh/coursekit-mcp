@@ -17,9 +17,9 @@ import { fileURLToPath } from 'url';
 // Import components to test
 import { ConfigurationManager } from '../config/ConfigurationManager.js';
 import { GammaAPIClient } from '../providers/gamma/GammaAPIClient.js';
-import { GammaAISkill } from '../skills/GammaAISkill.js';
-import { ImplementationCoachSkill } from '../skills/ImplementationCoachSkill.js';
-import { ProviderRegistry } from '../skills/ProviderRegistry.js';
+import { GammaAISkill } from '../registry/GammaAISkill.js';
+import { ImplementationCoachSkill } from '../registry/ImplementationCoachSkill.js';
+import { ProviderRegistry } from '../registry/ProviderRegistry.js';
 
 // Import mocks
 import { MockGammaAPI, createFetchMock } from './mocks/MockGammaAPI.js';

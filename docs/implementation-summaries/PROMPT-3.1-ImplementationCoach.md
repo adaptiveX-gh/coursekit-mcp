@@ -10,6 +10,8 @@ Complete implementation of **Prompt 3.1: Enhance Implementation Coach** with dyn
 
 ### 1. ImplementationCoachSkill.js ✅ (Enhanced Router)
 
+**Location:** `registry/ImplementationCoachSkill.js`
+
 **Requirements Met:**
 - ✅ ConfigurationManager integration
 - ✅ Dynamic provider loading

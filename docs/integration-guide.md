@@ -34,22 +34,15 @@ Modify your MCP server to include skill logic.
 ```javascript
 // coursekit-mcp-enhanced/index.js
 import { CourseKitServer } from './original-server.js';
-import { ConstitutionBuilderSkill } from './skills/constitution-builder.js';
-import { SpecificationRefinerSkill } from './skills/specification-refiner.js';
-import { PlanOptimizerSkill } from './skills/plan-optimizer.js';
-import { TaskGeneratorSkill } from './skills/task-generator.js';
-import { ImplementationCoachSkill } from './skills/implementation-coach.js';
+import { ImplementationCoachSkill } from './registry/ImplementationCoachSkill.js';
+import { GammaAISkill } from './registry/GammaAISkill.js';
+import { ProviderRegistry } from './registry/ProviderRegistry.js';
 
 class EnhancedCourseKitServer extends CourseKitServer {
   constructor() {
     super();
-    this.skills = {
-      constitution: new ConstitutionBuilderSkill(),
-      specification: new SpecificationRefinerSkill(),
-      plan: new PlanOptimizerSkill(),
-      tasks: new TaskGeneratorSkill(),
-      implementation: new ImplementationCoachSkill()
-    };
+    this.providerRegistry = new ProviderRegistry();
+    this.implementationCoach = new ImplementationCoachSkill();
   }
   
   async handleConstitution(args) {
@@ -101,13 +94,12 @@ app.listen(4000, () => {
 ```bash
 coursekit-enhanced/
 ├── mcp-server/           # Your existing MCP server
-├── skills/               # New skills directory
-│   ├── constitution-builder.js
-│   ├── specification-refiner.js
-│   ├── plan-optimizer.js
-│   ├── task-generator.js
-│   └── implementation-coach.js
-├── content-skills/       # Content creation skills
+├── registry/             # Provider registry and base classes
+│   ├── BaseContentSkill.js
+│   ├── GammaAISkill.js
+│   ├── ImplementationCoachSkill.js
+│   └── ProviderRegistry.js
+├── content-skills/       # Content creation skills (Claude Code skills)
 │   ├── slidev-skill.js
 │   ├── powerpoint-skill.js
 │   ├── exercise-skill.js
@@ -118,8 +110,8 @@ coursekit-enhanced/
 ### Step 2: Implement Base Skill Class
 
 ```javascript
-// skills/base-skill.js
-export class BaseSkill {
+// registry/BaseContentSkill.js
+export class BaseContentSkill {
   constructor(name, mcp) {
     this.name = name;
     this.mcp = mcp;
@@ -170,10 +162,11 @@ export class BaseSkill {
 ### Step 3: Implement Constitution Builder Skill
 
 ```javascript
-// skills/constitution-builder.js
-import { BaseSkill } from './base-skill.js';
+// .claude/skills/constitution-builder/SKILL.md
+// This would be a Claude Code skill, not part of the registry
+// The registry contains provider implementations like GammaAISkill
 
-export class ConstitutionBuilderSkill extends BaseSkill {
+export class ConstitutionBuilderSkill {
   constructor(mcp) {
     super('constitution-builder', mcp);
     
@@ -261,13 +254,11 @@ with resources including ${context.constraints['What resources can you provide?'
 ### Step 4: Implement Implementation Coach with Routing
 
 ```javascript
-// skills/implementation-coach.js
-import { BaseSkill } from './base-skill.js';
-import { SlidevSkill } from '../content-skills/slidev-skill.js';
-import { PowerPointSkill } from '../content-skills/powerpoint-skill.js';
-import { ExerciseSkill } from '../content-skills/exercise-skill.js';
+// registry/ImplementationCoachSkill.js
+import { GammaAISkill } from './GammaAISkill.js';
+import { ProviderRegistry } from './ProviderRegistry.js';
 
-export class ImplementationCoachSkill extends BaseSkill {
+export class ImplementationCoachSkill {
   constructor(mcp) {
     super('implementation-coach', mcp);
     
@@ -506,8 +497,9 @@ app.post('/api/course/create', async (req, res) => {
 
 ### Test Script
 ```javascript
-// test-skills.js
-import { ConstitutionBuilderSkill } from './skills/constitution-builder.js';
+// test-registry.js
+import { GammaAISkill } from './registry/GammaAISkill.js';
+import { ImplementationCoachSkill } from './registry/ImplementationCoachSkill.js';
 
 async function testConstitutionBuilder() {
   const skill = new ConstitutionBuilderSkill();

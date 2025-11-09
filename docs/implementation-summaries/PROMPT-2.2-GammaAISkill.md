@@ -10,8 +10,10 @@ Complete implementation of **Prompt 2.2: Create Gamma AI Skill** with comprehens
 
 ### 1. BaseContentSkill.js ✅ (Base Class)
 
+**Location:** `registry/BaseContentSkill.js`
+
 **Requirements Met:**
-- ✅ Abstract base class for all content skills
+- ✅ Abstract base class for all content providers
 - ✅ Defines required interface methods
 - ✅ Provides common functionality
 - ✅ Progress tracking support
@@ -49,6 +51,8 @@ export class BaseContentSkill {
 ---
 
 ### 2. GammaAISkill.js ✅ (Main Implementation)
+
+**Location:** `registry/GammaAISkill.js`
 
 **Requirements Met:**
 - ✅ Extends BaseContentSkill

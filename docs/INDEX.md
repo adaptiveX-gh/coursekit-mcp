@@ -236,12 +236,12 @@ CourseKit MCP Server
 - [API Client](../../../providers/gamma/GammaAPIClient.js)
 - [Content Converter](../../../providers/gamma/GammaContentConverter.js)
 
-### Skills
-- [Skills Overview](../../../skills/README.md)
-- [BaseContentSkill](../../../skills/BaseContentSkill.js)
-- [GammaAISkill](../../../skills/GammaAISkill.js)
-- [ImplementationCoach](../../../skills/ImplementationCoachSkill.js)
-- [ProviderRegistry](../../../skills/ProviderRegistry.js)
+### Registry
+- [Registry Overview](../../../registry/README.md)
+- [BaseContentSkill](../../../registry/BaseContentSkill.js)
+- [GammaAISkill](../../../registry/GammaAISkill.js)
+- [ImplementationCoach](../../../registry/ImplementationCoachSkill.js)
+- [ProviderRegistry](../../../registry/ProviderRegistry.js)
 
 ### Testing
 - [Test Suite Documentation](../../../test/README.md)
@@ -265,9 +265,9 @@ npm run test:integration
 # Specific component
 node config/ConfigurationManager.test.js
 node providers/gamma/GammaAPIClient.test.js
-node skills/GammaAISkill.test.js
-node skills/ImplementationCoachSkill.test.js
-node skills/ProviderRegistry.test.js
+node registry/GammaAISkill.test.js
+node registry/ImplementationCoachSkill.test.js
+node registry/ProviderRegistry.test.js
 node test/gamma-integration.test.js
 ```
 
@@ -325,7 +325,7 @@ coursekit-mcp/
 │   ├── GammaContentConverter.test.js
 │   └── README.md
 │
-├── skills/                             # Content generation skills
+├── registry/                           # Provider registry and base classes
 │   ├── BaseContentSkill.js
 │   ├── GammaAISkill.js
 │   ├── GammaAISkill.test.js

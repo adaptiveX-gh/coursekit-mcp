@@ -258,7 +258,7 @@ coursekit-skills/
 // In MCP server
 class SkillIntegration {
   async loadSkill(skillName) {
-    const skillPath = `./skills/${skillName}/SKILL.md`;
+    const skillPath = `./.claude/skills/${skillName}/SKILL.md`;
     const skill = await fs.readFile(skillPath, 'utf-8');
     return skill;
   }
