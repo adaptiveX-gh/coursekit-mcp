@@ -1,0 +1,26 @@
+{
+  "name": "coursekit-mcp",
+  "version": "0.2.0",
+  "description": "Spec-driven course development toolkit - MCP server implementation",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "mcp",
+    "coursekit",
+    "instructional-design",
+    "course-development",
+    "ai-assisted",
+    "slidev"
+  ],
+  "author": "Carlos",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "mcp_servers": {
+    "coursekit": {
+      "command": "node",
+      "args": ["./coursekit-mcp/index.js"],
+      "env": {
+        "NODE_ENV": "development",
+        "COURSEKIT_OUTPUT_DIR": "./coursekit-output"
+      }
+    }
+  }
+}
