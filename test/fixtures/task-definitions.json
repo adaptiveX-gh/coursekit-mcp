@@ -1,0 +1,42 @@
+{
+  "presentationTask": {
+    "id": "task-pres-1",
+    "description": "Create presentation slides for Business Agility Fundamentals",
+    "type": "slides",
+    "contentType": "presentation",
+    "format": "gamma",
+    "duration": 120,
+    "deliveryMethod": "live",
+    "requiredFeatures": ["themes", "export", "speaker-notes"]
+  },
+  "documentTask": {
+    "id": "task-doc-1",
+    "description": "Generate facilitator guide",
+    "type": "document",
+    "contentType": "document",
+    "format": "markdown"
+  },
+  "technicalPresentationTask": {
+    "id": "task-pres-tech-1",
+    "description": "Create technical slides with code examples",
+    "type": "slides",
+    "contentType": "presentation",
+    "format": "slidev",
+    "requiredFeatures": ["code-highlighting", "mermaid-diagrams"],
+    "techLevel": "advanced"
+  },
+  "exportToPDFTask": {
+    "id": "task-export-1",
+    "description": "Create presentation for distribution as PDF",
+    "type": "slides",
+    "contentType": "presentation",
+    "deliveryMethod": "handout"
+  },
+  "exportToPPTXTask": {
+    "id": "task-export-2",
+    "description": "Create presentation for editing in PowerPoint",
+    "type": "slides",
+    "contentType": "presentation",
+    "deliveryMethod": "distributed"
+  }
+}

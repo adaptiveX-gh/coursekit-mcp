@@ -1,0 +1,232 @@
+{
+  "_comment": "User Preferences Template - Copy this to user-preferences.json and customize",
+  "_instructions": {
+    "usage": "This file shows all available user preference options. Copy it to user-preferences.json and uncomment/modify the settings you want to change.",
+    "precedence": "User preferences override system defaults and provider defaults",
+    "persistence": "Changes are saved automatically when you call config.save()",
+    "security": "This file should NOT contain API keys - use .env for secrets"
+  },
+
+  "providers": {
+    "presentations": {
+      "_comment": "Presentation provider preferences",
+
+      "preferredProvider": "slidev",
+      "_preferredProvider_options": ["slidev", "powerpoint", "gamma"],
+      "_preferredProvider_note": "Default provider for slides/presentations",
+
+      "slidev": {
+        "enabled": true,
+        "config": {
+          "defaultTheme": "default",
+          "_theme_options": ["default", "seriph", "apple-basic", "bricks", "penguin"],
+
+          "highlighter": "shiki",
+          "_highlighter_options": ["shiki", "prism"],
+
+          "transition": "slide-left",
+          "_transition_options": ["slide-left", "slide-right", "slide-up", "fade", "none"],
+
+          "lineNumbers": false,
+          "drawings": {
+            "persist": false
+          }
+        }
+      },
+
+      "powerpoint": {
+        "enabled": true,
+        "config": {
+          "defaultTemplate": null,
+          "_defaultTemplate_note": "Path to your default PowerPoint template (.pptx)",
+
+          "useTemplates": true,
+          "includeSpeakerNotes": true
+        }
+      },
+
+      "gamma": {
+        "enabled": false,
+        "_enabled_note": "Set to true after adding GAMMA_API_KEY to .env",
+
+        "config": {
+          "model": "gamma-v1",
+          "_model_options": ["gamma-v1"],
+
+          "style": "professional",
+          "_style_options": ["professional", "casual", "creative", "minimal"],
+
+          "autoDesign": true,
+          "_autoDesign_note": "Let Gamma AI automatically design layouts",
+
+          "maxSlides": 50,
+          "_maxSlides_note": "Maximum slides per presentation (1-100)"
+        }
+      }
+    },
+
+    "documents": {
+      "_comment": "Document provider preferences",
+
+      "preferredProvider": "markdown",
+      "_preferredProvider_options": ["markdown", "docx", "pdf"],
+
+      "markdown": {
+        "enabled": true,
+        "config": {
+          "flavor": "github",
+          "_flavor_options": ["github", "commonmark", "gfm"],
+
+          "extensions": ["tables", "footnotes", "task-lists", "strikethrough"],
+          "_extensions_options": [
+            "tables",
+            "footnotes",
+            "task-lists",
+            "strikethrough",
+            "autolink",
+            "emoji"
+          ]
+        }
+      },
+
+      "docx": {
+        "enabled": true,
+        "config": {
+          "defaultTemplate": null,
+          "_defaultTemplate_note": "Path to your default Word template (.dotx or .docx)",
+
+          "useStyles": true,
+          "_useStyles_note": "Apply document styles for headers, body text, etc.",
+
+          "includeTableOfContents": true,
+          "_includeTableOfContents_note": "Automatically generate TOC for long documents"
+        }
+      },
+
+      "pdf": {
+        "enabled": true,
+        "config": {
+          "defaultTemplate": null,
+          "embedFonts": true,
+          "compressImages": true,
+          "pdfVersion": "1.7",
+          "_pdfVersion_options": ["1.4", "1.5", "1.6", "1.7", "2.0"]
+        }
+      }
+    },
+
+    "spreadsheets": {
+      "_comment": "Spreadsheet provider preferences",
+
+      "preferredProvider": "xlsx",
+
+      "xlsx": {
+        "enabled": true,
+        "config": {
+          "defaultTemplate": null,
+          "_defaultTemplate_note": "Path to your default Excel template (.xlsx)",
+
+          "includeFormulas": true,
+          "_includeFormulas_note": "Include formulas (not just values) in generated sheets",
+
+          "autoWidth": true,
+          "_autoWidth_note": "Automatically adjust column widths to content"
+        }
+      }
+    }
+  },
+
+  "defaults": {
+    "_comment": "System-wide default settings",
+
+    "format": "markdown",
+    "_format_options": ["markdown", "html", "pdf", "docx", "pptx"],
+    "_format_note": "Default output format when not specified",
+
+    "theme": "default",
+    "_theme_note": "Default theme for presentations and documents",
+
+    "quality": "production",
+    "_quality_options": ["draft", "standard", "production"],
+    "_quality_note": "Output quality level - affects detail, polish, and processing time"
+  },
+
+  "paths": {
+    "_comment": "Override default paths (use with caution)",
+    "_note": "Paths are relative to project root unless absolute",
+
+    "coursekit": ".coursekit",
+    "_coursekit_note": "Directory for generated course artifacts",
+
+    "templates": "templates",
+    "_templates_note": "Directory for user templates",
+
+    "output": ".coursekit/implementations",
+    "_output_note": "Default output directory for generated content"
+  },
+
+  "behavior": {
+    "_comment": "Application behavior settings",
+
+    "autoSave": true,
+    "_autoSave_note": "Automatically save preferences when changed",
+
+    "confirmOverwrite": true,
+    "_confirmOverwrite_note": "Ask before overwriting existing files",
+
+    "useFallback": true,
+    "_useFallback_note": "Use fallback provider on errors",
+
+    "retryOnError": true,
+    "maxRetries": 2,
+    "_retries_note": "Number of automatic retries on failure"
+  },
+
+  "experimental": {
+    "_comment": "Experimental features (may change)",
+    "_warning": "These features are not stable and may break",
+
+    "enableBetaProviders": false,
+    "enableAdvancedFormatting": false,
+    "enableParallelGeneration": false
+  },
+
+  "_customization_examples": {
+    "_comment": "Delete this section - these are just examples",
+
+    "example1_prefer_gamma_for_presentations": {
+      "providers": {
+        "presentations": {
+          "preferredProvider": "gamma",
+          "gamma": {
+            "enabled": true
+          }
+        }
+      }
+    },
+
+    "example2_always_use_docx": {
+      "providers": {
+        "documents": {
+          "preferredProvider": "docx"
+        }
+      },
+      "defaults": {
+        "format": "docx"
+      }
+    },
+
+    "example3_draft_mode_for_speed": {
+      "defaults": {
+        "quality": "draft"
+      }
+    },
+
+    "example4_custom_paths": {
+      "paths": {
+        "coursekit": "./my-courses",
+        "output": "./output/generated"
+      }
+    }
+  }
+}

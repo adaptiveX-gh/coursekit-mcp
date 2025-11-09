@@ -1,0 +1,241 @@
+{
+  "presentations": {
+    "slidev": {
+      "enabled": true,
+      "priority": 10,
+      "api": {
+        "type": "local",
+        "rateLimit": {
+          "unlimited": true
+        },
+        "timeout": 30000
+      },
+      "capabilities": {
+        "contentTypes": ["slides", "presentation"],
+        "formats": ["markdown"],
+        "features": ["code-highlighting", "themes", "animations", "mermaid", "vue-components"],
+        "techLevel": ["beginner", "intermediate", "advanced"],
+        "outputFormats": ["html", "pdf", "pptx"]
+      },
+      "config": {
+        "defaultTheme": "default",
+        "highlighter": "shiki",
+        "transition": "slide-left",
+        "lineNumbers": false,
+        "drawings": {
+          "persist": false
+        }
+      },
+      "requirements": {
+        "apiKey": false,
+        "internet": false,
+        "localInstall": true
+      },
+      "fallback": {
+        "onError": "powerpoint"
+      }
+    },
+    "powerpoint": {
+      "enabled": true,
+      "priority": 8,
+      "api": {
+        "type": "local",
+        "rateLimit": {
+          "unlimited": true
+        },
+        "timeout": 30000
+      },
+      "capabilities": {
+        "contentTypes": ["slides", "presentation"],
+        "formats": ["pptx"],
+        "features": ["templates", "animations", "charts", "smartart", "themes"],
+        "techLevel": ["beginner", "intermediate", "advanced"],
+        "outputFormats": ["pptx"]
+      },
+      "config": {
+        "defaultTemplate": null,
+        "useTemplates": true,
+        "includeSpeakerNotes": true
+      },
+      "requirements": {
+        "apiKey": false,
+        "internet": false,
+        "localInstall": false
+      },
+      "fallback": {
+        "onError": "slidev"
+      }
+    },
+    "gamma": {
+      "enabled": false,
+      "priority": 9,
+      "api": {
+        "baseUrl": "https://api.gamma.app/v1",
+        "endpoints": {
+          "generate": "/content/generate",
+          "export": "/content/export",
+          "status": "/content/status"
+        },
+        "rateLimit": {
+          "requestsPerMinute": 20,
+          "requestsPerHour": 500,
+          "requestsPerDay": 5000,
+          "retryAfter": 60
+        },
+        "timeout": 60000
+      },
+      "capabilities": {
+        "contentTypes": ["slides", "presentation", "documents", "webpages"],
+        "formats": ["ai-generated"],
+        "features": ["ai-design", "auto-layout", "smart-content", "responsive", "collaborative"],
+        "techLevel": ["beginner", "intermediate"],
+        "outputFormats": ["html", "pdf", "pptx"]
+      },
+      "config": {
+        "model": "gamma-v1",
+        "style": "professional",
+        "autoDesign": true,
+        "maxSlides": 50
+      },
+      "requirements": {
+        "apiKey": true,
+        "apiKeyEnvVar": "GAMMA_API_KEY",
+        "internet": true,
+        "localInstall": false
+      },
+      "fallback": {
+        "onError": "slidev",
+        "onRateLimit": "powerpoint",
+        "onTimeout": "slidev"
+      }
+    }
+  },
+  "documents": {
+    "markdown": {
+      "enabled": true,
+      "priority": 10,
+      "api": {
+        "type": "local",
+        "rateLimit": {
+          "unlimited": true
+        },
+        "timeout": 10000
+      },
+      "capabilities": {
+        "contentTypes": ["documentation", "guides", "exercises"],
+        "formats": ["markdown"],
+        "features": ["simple", "fast", "portable", "version-control-friendly"],
+        "techLevel": ["beginner", "intermediate", "advanced"],
+        "outputFormats": ["md", "html", "pdf"]
+      },
+      "config": {
+        "flavor": "github",
+        "extensions": ["tables", "footnotes", "task-lists", "strikethrough"]
+      },
+      "requirements": {
+        "apiKey": false,
+        "internet": false,
+        "localInstall": false
+      },
+      "fallback": {
+        "onError": "docx"
+      }
+    },
+    "docx": {
+      "enabled": true,
+      "priority": 8,
+      "api": {
+        "type": "local",
+        "rateLimit": {
+          "unlimited": true
+        },
+        "timeout": 20000
+      },
+      "capabilities": {
+        "contentTypes": ["documentation", "guides", "handouts"],
+        "formats": ["docx"],
+        "features": ["styles", "templates", "headers-footers", "toc", "track-changes"],
+        "techLevel": ["beginner", "intermediate", "advanced"],
+        "outputFormats": ["docx", "pdf"]
+      },
+      "config": {
+        "defaultTemplate": null,
+        "useStyles": true,
+        "includeTableOfContents": true
+      },
+      "requirements": {
+        "apiKey": false,
+        "internet": false,
+        "localInstall": false
+      },
+      "fallback": {
+        "onError": "markdown"
+      }
+    },
+    "pdf": {
+      "enabled": true,
+      "priority": 7,
+      "api": {
+        "type": "local",
+        "rateLimit": {
+          "unlimited": true
+        },
+        "timeout": 30000
+      },
+      "capabilities": {
+        "contentTypes": ["documentation", "guides", "handouts", "certificates"],
+        "formats": ["pdf"],
+        "features": ["professional", "portable", "print-ready", "secure"],
+        "techLevel": ["beginner", "intermediate", "advanced"],
+        "outputFormats": ["pdf"]
+      },
+      "config": {
+        "defaultTemplate": null,
+        "embedFonts": true,
+        "compressImages": true,
+        "pdfVersion": "1.7"
+      },
+      "requirements": {
+        "apiKey": false,
+        "internet": false,
+        "localInstall": false
+      },
+      "fallback": {
+        "onError": "docx"
+      }
+    }
+  },
+  "spreadsheets": {
+    "xlsx": {
+      "enabled": true,
+      "priority": 10,
+      "api": {
+        "type": "local",
+        "rateLimit": {
+          "unlimited": true
+        },
+        "timeout": 15000
+      },
+      "capabilities": {
+        "contentTypes": ["data", "assessment", "tracking", "analytics"],
+        "formats": ["xlsx"],
+        "features": ["formulas", "charts", "pivot-tables", "conditional-formatting"],
+        "techLevel": ["beginner", "intermediate", "advanced"],
+        "outputFormats": ["xlsx", "csv"]
+      },
+      "config": {
+        "defaultTemplate": null,
+        "includeFormulas": true,
+        "autoWidth": true
+      },
+      "requirements": {
+        "apiKey": false,
+        "internet": false,
+        "localInstall": false
+      },
+      "fallback": {
+        "onError": null
+      }
+    }
+  }
+}

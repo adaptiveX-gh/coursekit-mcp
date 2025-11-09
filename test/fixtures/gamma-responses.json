@@ -1,0 +1,127 @@
+{
+  "success": {
+    "create": {
+      "id": "pres_12345abcde",
+      "status": "pending",
+      "title": "Business Agility Fundamentals",
+      "url": "https://gamma.app/docs/pres_12345abcde",
+      "createdAt": "2025-01-15T10:00:00Z"
+    },
+    "getPresentation": {
+      "processing": {
+        "id": "pres_12345abcde",
+        "status": "processing",
+        "title": "Business Agility Fundamentals",
+        "url": "https://gamma.app/docs/pres_12345abcde",
+        "progress": 45
+      },
+      "completed": {
+        "id": "pres_12345abcde",
+        "status": "completed",
+        "title": "Business Agility Fundamentals",
+        "url": "https://gamma.app/docs/pres_12345abcde",
+        "slideCount": 35,
+        "theme": "modern",
+        "createdAt": "2025-01-15T10:00:00Z",
+        "completedAt": "2025-01-15T10:03:00Z"
+      }
+    },
+    "export": {
+      "pdf": "mock-pdf-blob-data",
+      "pptx": "mock-pptx-blob-data",
+      "html": "<html><body>Mock HTML Export</body></html>"
+    }
+  },
+  "errors": {
+    "unauthorized": {
+      "status": 401,
+      "error": {
+        "code": "UNAUTHORIZED",
+        "message": "Invalid API key"
+      }
+    },
+    "rateLimit": {
+      "status": 429,
+      "headers": {
+        "X-RateLimit-Remaining": "0",
+        "X-RateLimit-Reset": "1642248120",
+        "Retry-After": "60"
+      },
+      "error": {
+        "code": "RATE_LIMIT_EXCEEDED",
+        "message": "Rate limit exceeded. Please try again later.",
+        "retryAfter": 60
+      }
+    },
+    "serverError": {
+      "status": 500,
+      "error": {
+        "code": "INTERNAL_SERVER_ERROR",
+        "message": "An unexpected error occurred"
+      }
+    },
+    "generationFailed": {
+      "status": 200,
+      "id": "pres_12345abcde",
+      "status": "failed",
+      "error": "Content generation failed due to invalid prompt"
+    },
+    "notFound": {
+      "status": 404,
+      "error": {
+        "code": "NOT_FOUND",
+        "message": "Presentation not found"
+      }
+    },
+    "invalidFormat": {
+      "status": 400,
+      "error": {
+        "code": "INVALID_FORMAT",
+        "message": "Invalid export format: xyz"
+      }
+    }
+  },
+  "retry": {
+    "firstAttemptFails": [
+      {
+        "status": 503,
+        "error": {
+          "code": "SERVICE_UNAVAILABLE",
+          "message": "Service temporarily unavailable"
+        }
+      },
+      {
+        "httpStatus": 200,
+        "id": "pres_12345abcde",
+        "status": "pending",
+        "title": "Business Agility Fundamentals",
+        "url": "https://gamma.app/docs/pres_12345abcde",
+        "createdAt": "2025-01-15T10:00:00Z"
+      }
+    ],
+    "multipleFailuresThenSuccess": [
+      {
+        "status": 503,
+        "error": {
+          "code": "SERVICE_UNAVAILABLE",
+          "message": "Service temporarily unavailable"
+        }
+      },
+      {
+        "status": 503,
+        "error": {
+          "code": "SERVICE_UNAVAILABLE",
+          "message": "Service temporarily unavailable"
+        }
+      },
+      {
+        "httpStatus": 200,
+        "id": "pres_12345abcde",
+        "status": "pending",
+        "title": "Business Agility Fundamentals",
+        "url": "https://gamma.app/docs/pres_12345abcde",
+        "createdAt": "2025-01-15T10:00:00Z"
+      }
+    ]
+  }
+}

@@ -49,7 +49,19 @@ MCP server implementing spec-driven development for course and workshop creation
 │   │   └── scripts/
 │   └── xlsx/               # Excel spreadsheets
 │       └── scripts/
-├── .docs/                   # Documentation & utilities
+├── .docs/                   # 📚 Documentation & implementation summaries
+│   ├── INDEX.md            # Master documentation index
+│   ├── README.md           # Documentation guide
+│   ├── CLAUDE-IMPLEMENTATION-PROMPTS.md  # All implementation prompts
+│   ├── implementation-summaries/  # Phase-by-phase implementation docs
+│   │   ├── PROMPT-1.1-ConfigurationManager.md
+│   │   ├── PROMPT-1.2-ConfigurationFiles.md
+│   │   ├── PROMPT-2.1-GammaAPIClient.md
+│   │   ├── PROMPT-2.2-GammaAISkill.md
+│   │   ├── PROMPT-3.1-ImplementationCoach.md
+│   │   ├── PROMPT-3.2-ProviderRegistry.md
+│   │   ├── PROMPT-4.1-IntegrationTests.md
+│   │   └── PROMPT-4.1-Deliverables.md
 │   ├── tests/              # Test scripts
 │   ├── workflows/          # Example workflows
 │   ├── mcp-settings/       # Configuration examples
@@ -130,6 +142,23 @@ Each tool reads context from previous phases in `.coursekit/` directory.
 
 When a user says "create a workshop," the constitution-builder skill guides them through problem definition, audience analysis, goal setting, pedagogical approach, and constraints before calling `coursekit.constitution` with an enriched vision statement.
 
+## Documentation
+
+**📖 Start here**: [.claude/skills/.docs/INDEX.md](.claude/skills/.docs/INDEX.md)
+
+The documentation index provides:
+- Links to all implementation summaries
+- Architecture overview
+- Test coverage statistics
+- Component documentation
+- Quick reference commands
+
+Implementation summaries are organized in `.claude/skills/.docs/implementation-summaries/` and include:
+- Phase 1: Configuration System (Prompts 1.1, 1.2)
+- Phase 2: Gamma AI Integration (Prompts 2.1, 2.2)
+- Phase 3: Provider Management (Prompts 3.1, 3.2)
+- Phase 4: Testing & Validation (Prompt 4.1)
+
 ## Common Commands
 
 ```bash
@@ -138,6 +167,8 @@ npm start                                    # Start MCP server
 node index.js                                # Start server directly
 
 # Testing
+npm test                                     # Run all tests
+npm run test:integration                     # Run integration tests
 node .claude/skills/.docs/tests/test.js             # Basic MCP tests
 node .claude/skills/.docs/tests/interactive-test.js # Interactive tool testing
 

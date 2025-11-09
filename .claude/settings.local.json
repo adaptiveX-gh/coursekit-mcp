@@ -11,7 +11,14 @@
       "Bash(nul)",
       "Bash(findstr:*)",
       "Bash(test:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(node config/ConfigurationManager.test.js:*)",
+      "Bash(node config/example-usage.js:*)",
+      "Bash(node:*)",
+      "Bash(for file in gamma-integration.test.js mocks/*.js fixtures/*.json)",
+      "Bash(done)",
+      "Bash(npm test)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

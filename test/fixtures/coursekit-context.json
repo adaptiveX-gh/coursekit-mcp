@@ -1,0 +1,102 @@
+{
+  "constitution": {
+    "title": "Business Agility Fundamentals",
+    "tagline": "Master adaptive business strategies",
+    "audience": "Business professionals transitioning to agile methodologies",
+    "focus": "Practical application of business agility principles",
+    "techLevel": "beginner",
+    "pedagogicalApproach": "Hands-on, scenario-based learning",
+    "constraints": {
+      "duration": "2 days",
+      "format": "Workshop",
+      "deliveryMode": "In-person with virtual option"
+    }
+  },
+  "specification": {
+    "outcomes": [
+      "Understand core principles of business agility",
+      "Apply agile frameworks to business scenarios",
+      "Identify opportunities for organizational transformation",
+      "Lead agile initiatives within teams",
+      "Measure and improve business agility metrics"
+    ],
+    "assessments": [
+      "Case study analysis",
+      "Team simulation exercise",
+      "Agility transformation roadmap"
+    ],
+    "prerequisites": [
+      "Basic understanding of business operations",
+      "No prior agile experience required"
+    ]
+  },
+  "plan": {
+    "duration": 120,
+    "modules": [
+      {
+        "title": "Introduction to Business Agility",
+        "duration": 20,
+        "objectives": [
+          "Define business agility and its core principles",
+          "Explore the evolution from traditional to agile business models"
+        ],
+        "content": "Overview of business agility concepts and benefits"
+      },
+      {
+        "title": "Agile Frameworks and Methodologies",
+        "duration": 30,
+        "objectives": [
+          "Compare popular agile frameworks (Scrum, Kanban, SAFe)",
+          "Understand when to apply different methodologies"
+        ],
+        "content": "Deep dive into agile frameworks with practical examples"
+      },
+      {
+        "title": "Organizational Transformation",
+        "duration": 25,
+        "objectives": [
+          "Identify barriers to agile adoption",
+          "Develop strategies for cultural change"
+        ],
+        "content": "Change management and organizational design for agility"
+      },
+      {
+        "title": "Metrics and Continuous Improvement",
+        "duration": 25,
+        "objectives": [
+          "Define and track agility metrics",
+          "Implement feedback loops and retrospectives"
+        ],
+        "content": "Measuring business agility and iterative improvement"
+      },
+      {
+        "title": "Hands-on Simulation",
+        "duration": 20,
+        "objectives": [
+          "Apply learned concepts in simulated scenarios",
+          "Practice agile decision-making"
+        ],
+        "content": "Interactive business agility simulation exercise"
+      }
+    ],
+    "totalSlides": 35
+  },
+  "tasks": [
+    {
+      "id": "task-1",
+      "description": "Create presentation slides for Business Agility Fundamentals",
+      "contentType": "slides",
+      "format": "gamma",
+      "duration": 120,
+      "deliveryMethod": "live",
+      "requiredFeatures": ["themes", "export", "speaker-notes"]
+    },
+    {
+      "id": "task-2",
+      "description": "Generate facilitator guide",
+      "contentType": "document",
+      "format": "markdown"
+    }
+  ],
+  "coursekitPath": "./.coursekit"
+}

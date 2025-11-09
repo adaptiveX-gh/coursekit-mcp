@@ -1,0 +1,140 @@
+{
+  "systemDefaults": {
+    "system": {
+      "version": "0.2.0",
+      "environment": "test"
+    },
+    "providers": {}
+  },
+  "providerDefaults": {
+    "presentations": {
+      "gamma": {
+        "enabled": true,
+        "priority": 10,
+        "capabilities": {
+          "contentTypes": ["presentations", "slides", "decks"],
+          "formats": ["gamma", "pdf", "pptx", "html"],
+          "features": ["ai-generation", "themes", "export", "templates"],
+          "techLevel": ["beginner", "intermediate", "advanced"]
+        },
+        "requirements": {
+          "apiKey": true,
+          "apiKeyEnvVar": "GAMMA_API_KEY"
+        },
+        "config": {
+          "maxSlides": 50,
+          "defaultTheme": "modern"
+        }
+      },
+      "slidev": {
+        "enabled": true,
+        "priority": 5,
+        "capabilities": {
+          "contentTypes": ["presentations", "slides"],
+          "formats": ["markdown", "html", "pdf"],
+          "features": ["code-highlighting", "mermaid-diagrams", "animations"],
+          "techLevel": ["intermediate", "advanced"]
+        },
+        "config": {
+          "theme": "default",
+          "transition": "slide-left"
+        }
+      }
+    },
+    "documents": {
+      "markdown": {
+        "enabled": true,
+        "priority": 10,
+        "capabilities": {
+          "contentTypes": ["document", "doc", "report"],
+          "formats": ["markdown", "html"],
+          "features": ["simple-formatting", "fast-generation"],
+          "techLevel": ["beginner", "intermediate", "advanced"]
+        }
+      }
+    }
+  },
+  "userPreferences": {
+    "providers": {
+      "presentations": {
+        "preferredProvider": "gamma",
+        "gamma": {
+          "config": {
+            "defaultTheme": "corporate"
+          }
+        }
+      }
+    },
+    "preferences": {
+      "providerSelection": {
+        "presentations": "auto",
+        "documents": "ask"
+      }
+    }
+  },
+  "envConfig": {
+    "gamma_api_key": "test-api-key-12345",
+    "debug": "true"
+  },
+  "merged": {
+    "system": {
+      "version": "0.2.0",
+      "environment": "test"
+    },
+    "providers": {
+      "presentations": {
+        "preferredProvider": "gamma",
+        "gamma": {
+          "enabled": true,
+          "priority": 10,
+          "capabilities": {
+            "contentTypes": ["presentations", "slides", "decks"],
+            "formats": ["gamma", "pdf", "pptx", "html"],
+            "features": ["ai-generation", "themes", "export", "templates"],
+            "techLevel": ["beginner", "intermediate", "advanced"]
+          },
+          "requirements": {
+            "apiKey": true,
+            "apiKeyEnvVar": "GAMMA_API_KEY"
+          },
+          "config": {
+            "maxSlides": 50,
+            "defaultTheme": "corporate"
+          }
+        },
+        "slidev": {
+          "enabled": true,
+          "priority": 5,
+          "capabilities": {
+            "contentTypes": ["presentations", "slides"],
+            "formats": ["markdown", "html", "pdf"],
+            "features": ["code-highlighting", "mermaid-diagrams", "animations"],
+            "techLevel": ["intermediate", "advanced"]
+          },
+          "config": {
+            "theme": "default",
+            "transition": "slide-left"
+          }
+        }
+      },
+      "documents": {
+        "markdown": {
+          "enabled": true,
+          "priority": 10,
+          "capabilities": {
+            "contentTypes": ["document", "doc", "report"],
+            "formats": ["markdown", "html"],
+            "features": ["simple-formatting", "fast-generation"],
+            "techLevel": ["beginner", "intermediate", "advanced"]
+          }
+        }
+      }
+    },
+    "preferences": {
+      "providerSelection": {
+        "presentations": "auto",
+        "documents": "ask"
+      }
+    }
+  }
+}

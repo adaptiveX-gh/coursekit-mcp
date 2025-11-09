@@ -44,6 +44,9 @@ build/
 *api-key*
 *api_key*
 
+# Configuration (user-preferences.json is safe to commit - contains no secrets)
+# .env files are in the Environment section above
+
 # Generated content during development
 *.generated.md
 test-output/

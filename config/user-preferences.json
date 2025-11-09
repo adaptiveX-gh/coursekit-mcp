@@ -1,0 +1,27 @@
+{
+  "_comment": "User preferences override system defaults. This file is created automatically.",
+  "providers": {
+    "presentations": {
+      "preferredProvider": "slidev",
+      "gamma": {
+        "enabled": false
+      },
+      "slidev": {
+        "config": {
+          "defaultTheme": "default"
+        }
+      }
+    },
+    "documents": {
+      "preferredProvider": "markdown"
+    }
+  },
+  "defaults": {
+    "quality": "production"
+  },
+  "test": {
+    "save": {
+      "value": "test123"
+    }
+  }
+}
