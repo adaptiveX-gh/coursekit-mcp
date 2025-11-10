@@ -22,7 +22,8 @@
       "Bash(python:*)",
       "Bash(npm install:*)",
       "Bash(cat:*)",
-      "Bash(npm run test:pdf:*)"
+      "Bash(npm run test:pdf:*)",
+      "Skill(content-auditor)"
     ],
     "deny": [],
     "ask": []
