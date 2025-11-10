@@ -1,0 +1,39 @@
+{
+  "title": "Course Title",
+  "format": "workshop",
+  "duration": "4 hours",
+  "modules": [
+    {
+      "module_id": "module_1",
+      "module_number": 1,
+      "module_name": "Module Name",
+      "learning_objectives": [
+        "First learning objective",
+        "Second learning objective"
+      ],
+      "timeline": [
+        {
+          "time": "0:00-0:15",
+          "activity": "Introduction and setup"
+        },
+        {
+          "time": "0:15-0:45",
+          "activity": "Core concepts"
+        }
+      ],
+      "activities": [
+        {
+          "type": "Hands-on Exercise",
+          "description": "Activity description",
+          "duration": 20
+        }
+      ],
+      "materials": [
+        "Slides",
+        "Exercise handout",
+        "Code examples"
+      ],
+      "estimated_duration": 45
+    }
+  ]
+}

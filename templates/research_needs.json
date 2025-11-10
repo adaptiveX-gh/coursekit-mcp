@@ -1,0 +1,47 @@
+{
+  "research_needs": [
+    {
+      "id": "research_1",
+      "type": "data",
+      "priority": "high",
+      "need": "Current statistics on topic adoption",
+      "context": "Plan mentions industry trends but lacks supporting data",
+      "suggested_search": "current statistics on [topic] adoption rates 2024",
+      "location": "module_2",
+      "status": "pending"
+    },
+    {
+      "id": "research_2",
+      "type": "example",
+      "priority": "high",
+      "need": "Real-world case study for practical application",
+      "context": "Module 3 requires hands-on example",
+      "suggested_search": "[topic] case study examples industry",
+      "location": "module_3",
+      "status": "pending"
+    },
+    {
+      "id": "research_3",
+      "type": "evidence",
+      "priority": "medium",
+      "need": "Research supporting effectiveness claim",
+      "context": "Plan claims productivity improvements without citation",
+      "suggested_search": "research evidence [topic] productivity improvement",
+      "location": "plan_overview",
+      "status": "pending"
+    }
+  ],
+  "metadata": {
+    "total_needs": 3,
+    "by_priority": {
+      "high": 2,
+      "medium": 1
+    },
+    "by_type": {
+      "data": 1,
+      "example": 1,
+      "evidence": 1
+    },
+    "generated_at": "2025-11-09T00:00:00.000Z"
+  }
+}

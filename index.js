@@ -14,6 +14,10 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
+import { analyzeMaterials } from './lib/ingest/material-analyzer.js';
+import { synthesizeThemes } from './lib/themes/theme-synthesizer.js';
+import { validatePlan } from './lib/validators/plan-validator.js';
+import { identifyResearchNeeds, formatResearchNeeds } from './lib/validators/gap-identifier.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -93,7 +97,9 @@ class CourseKitServer {
       specification: null,
       plan: null,
       tasks: null,
-      implementations: []
+      implementations: [],
+      materials: null,
+      themes: null
     };
   }
 
@@ -109,6 +115,14 @@ class CourseKitServer {
     return filepath;
   }
 
+  async saveJSON(type, data) {
+    await this.ensureProjectDir();
+    const filename = `${type}.json`;
+    const filepath = path.join(this.projectDir, filename);
+    await fs.writeFile(filepath, JSON.stringify(data, null, 2));
+    return filepath;
+  }
+
   async loadProject() {
     try {
       const files = ['constitution', 'specification', 'plan', 'tasks'];
@@ -120,17 +134,131 @@ class CourseKitServer {
           // File doesn't exist yet, that's ok
         }
       }
+
+      // Load JSON artifacts
+      try {
+        const materialsPath = path.join(this.projectDir, 'materials.json');
+        this.currentProject.materials = JSON.parse(await fs.readFile(materialsPath, 'utf-8'));
+      } catch (e) {
+        // Materials not yet ingested
+      }
+
+      try {
+        const themesPath = path.join(this.projectDir, 'themes.json');
+        this.currentProject.themes = JSON.parse(await fs.readFile(themesPath, 'utf-8'));
+      } catch (e) {
+        // Themes not yet extracted
+      }
     } catch (e) {
       // Project doesn't exist yet
     }
   }
 
   // Tool implementations
+  async handleIngest(args) {
+    try {
+      // Prepare sources from arguments
+      const sources = {
+        pdfPaths: args.pdf_paths || [],
+        markdownPaths: args.markdown_paths || [],
+        textPaths: args.text_paths || [],
+        urls: args.urls || []
+      };
+
+      // Analyze materials
+      const analysis = await analyzeMaterials(sources);
+
+      // Save materials analysis
+      this.currentProject.materials = analysis;
+      const filepath = await this.saveJSON('materials', analysis);
+
+      return {
+        success: true,
+        analysis: analysis,
+        file: filepath,
+        summary: {
+          totalSources: analysis.metadata.totalSources,
+          learningOutcomes: analysis.synthesized.learningOutcomes.length,
+          concepts: analysis.synthesized.concepts.length,
+          topics: analysis.synthesized.topics.length,
+          errors: analysis.metadata.errors.length,
+          warnings: analysis.metadata.warnings.length
+        },
+        message: `Materials ingested successfully: ${analysis.metadata.totalSources} sources processed`
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        help: 'Ensure file paths are valid and files are accessible'
+      };
+    }
+  }
+
+  async handleThemes(args) {
+    try {
+      const {
+        source = 'materials',
+        granularity = 'medium'
+      } = args;
+
+      // Determine source: materials or constitution+materials
+      let materialsAnalysis = this.currentProject.materials;
+      const constitution = this.currentProject.constitution;
+
+      if (!materialsAnalysis || !materialsAnalysis.synthesized) {
+        return {
+          success: false,
+          error: 'No materials have been ingested yet',
+          help: 'Run coursekit.ingest first to analyze materials before extracting themes'
+        };
+      }
+
+      // Synthesize themes
+      const themesResult = await synthesizeThemes(
+        materialsAnalysis,
+        constitution,
+        { granularity }
+      );
+
+      if (!themesResult.success) {
+        return {
+          success: false,
+          error: 'Theme extraction failed',
+          details: themesResult
+        };
+      }
+
+      // Save themes
+      this.currentProject.themes = themesResult;
+      const filepath = await this.saveJSON('themes', themesResult);
+
+      return {
+        success: true,
+        themes: themesResult.themes,
+        file: filepath,
+        summary: {
+          themesGenerated: themesResult.metadata.themesGenerated,
+          totalOutcomes: themesResult.metadata.totalOutcomes,
+          alignmentScore: themesResult.metadata.alignmentScore,
+          warnings: themesResult.warnings.length
+        },
+        message: `Themes extracted successfully: ${themesResult.metadata.themesGenerated} themes from ${themesResult.metadata.totalOutcomes} learning outcomes`
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        help: 'Ensure materials have been ingested with coursekit.ingest'
+      };
+    }
+  }
+
   async handleConstitution(args) {
     const content = this.generateConstitution(args.vision);
     this.currentProject.constitution = content;
     const filepath = await this.saveArtifact('constitution', content);
-    
+
     return {
       success: true,
       content: content,
@@ -156,12 +284,49 @@ class CourseKitServer {
     const content = this.generatePlan(args);
     this.currentProject.plan = content;
     const filepath = await this.saveArtifact('plan', content);
-    
+
+    // Validate the plan
+    const context = {
+      constitution: this.currentProject.constitution,
+      specification: this.currentProject.specification,
+      themes: this.currentProject.themes,
+      materials: this.currentProject.materials
+    };
+
+    const validation = validatePlan(content, context);
+
+    // Identify research needs
+    const researchNeeds = identifyResearchNeeds(content, validation.outline, context);
+
+    // Save research needs if any gaps found
+    let researchNeedsFile = null;
+    if (researchNeeds.hasGaps) {
+      const formattedNeeds = formatResearchNeeds(researchNeeds.researchNeeds);
+      researchNeedsFile = await this.saveJSON('research_needs', formattedNeeds);
+    }
+
     return {
       success: true,
       content: content,
       file: filepath,
-      message: "Plan created successfully"
+      validation: {
+        valid: validation.valid,
+        score: validation.score,
+        issueCount: validation.issues.length,
+        recommendationCount: validation.recommendations.length,
+        issues: validation.issues,
+        recommendations: validation.recommendations
+      },
+      researchNeeds: {
+        hasGaps: researchNeeds.hasGaps,
+        totalGaps: researchNeeds.metadata.totalGaps,
+        priorityBreakdown: researchNeeds.metadata.priorityBreakdown,
+        file: researchNeedsFile,
+        needs: researchNeeds.researchNeeds.slice(0, 5) // Return first 5 for preview
+      },
+      message: researchNeeds.hasGaps
+        ? `Plan created with validation score ${validation.score}/100. ${researchNeeds.metadata.totalGaps} research needs identified.`
+        : `Plan created successfully with validation score ${validation.score}/100.`
     };
   }
 
@@ -180,23 +345,121 @@ class CourseKitServer {
 
   async handleImplement(args) {
     const content = this.generateImplementation(args.task);
-    
+
     const implFilename = `implementation-${Date.now()}.md`;
     const implPath = path.join(this.projectDir, implFilename);
     await this.ensureProjectDir();
     await fs.writeFile(implPath, content);
-    
+
     this.currentProject.implementations.push({
       task: args.task,
       file: implFilename,
       content: content
     });
-    
+
     return {
       success: true,
       content: content,
       file: implPath,
       message: `Implementation created for: ${args.task}`
+    };
+  }
+
+  async handleResearch(args) {
+    try {
+      // Load research needs
+      const needsPath = path.join(this.projectDir, 'research_needs.json');
+      let researchNeeds;
+
+      try {
+        const needsContent = await fs.readFile(needsPath, 'utf-8');
+        researchNeeds = JSON.parse(needsContent);
+      } catch (e) {
+        return {
+          success: false,
+          error: 'No research needs found',
+          help: 'Run coursekit.plan first to identify research needs'
+        };
+      }
+
+      // Load existing research notes if any
+      let existingNotes = { findings: [], metadata: { totalFindings: 0 } };
+      try {
+        const notesPath = path.join(this.projectDir, 'research_notes.json');
+        const notesContent = await fs.readFile(notesPath, 'utf-8');
+        existingNotes = JSON.parse(notesContent);
+      } catch (e) {
+        // No existing notes, that's fine
+      }
+
+      // For MVP: Return structure for manual research
+      // Full implementation would use WebSearch here
+      const pendingNeeds = researchNeeds.research_needs.filter(n => n.status === 'pending');
+
+      if (pendingNeeds.length === 0) {
+        return {
+          success: true,
+          message: 'All research needs have been addressed',
+          summary: {
+            totalNeeds: researchNeeds.research_needs.length,
+            completed: researchNeeds.research_needs.filter(n => n.status === 'completed').length,
+            findings: existingNotes.findings.length
+          }
+        };
+      }
+
+      // Generate research guidance
+      const guidance = this.generateResearchGuidance(pendingNeeds);
+
+      return {
+        success: true,
+        researchNeeds: pendingNeeds,
+        guidance: guidance,
+        nextSteps: [
+          'Use the researcher skill to guide manual research',
+          'For automated research, integrate WebSearch capability',
+          'Update research_notes.json with findings',
+          'Mark research needs as completed in research_needs.json'
+        ],
+        message: `${pendingNeeds.length} research needs identified. Use researcher skill for guided research process.`
+      };
+
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        help: 'Ensure plan has been created and research needs identified'
+      };
+    }
+  }
+
+  generateResearchGuidance(needs) {
+    return {
+      totalNeeds: needs.length,
+      byPriority: {
+        critical: needs.filter(n => n.priority === 'critical').length,
+        high: needs.filter(n => n.priority === 'high').length,
+        medium: needs.filter(n => n.priority === 'medium').length,
+        low: needs.filter(n => n.priority === 'low').length
+      },
+      byType: {
+        data: needs.filter(n => n.type === 'data').length,
+        example: needs.filter(n => n.type === 'example').length,
+        evidence: needs.filter(n => n.type === 'evidence').length,
+        concept: needs.filter(n => n.type === 'concept').length
+      },
+      recommendedOrder: [
+        ...needs.filter(n => n.priority === 'critical'),
+        ...needs.filter(n => n.priority === 'high'),
+        ...needs.filter(n => n.priority === 'medium'),
+        ...needs.filter(n => n.priority === 'low')
+      ].slice(0, 10), // Top 10
+      searchStrategy: {
+        data: 'Use academic databases, industry reports, government statistics',
+        example: 'Search for case studies, GitHub repositories, blog posts from practitioners',
+        evidence: 'Look for peer-reviewed papers, meta-analyses, systematic reviews',
+        concept: 'Use educational resources, documentation, tutorials, expert blogs'
+      }
     };
   }
 
@@ -2106,12 +2369,62 @@ server.register('tools/list', async () => {
   return {
     tools: [
       {
+        name: 'coursekit.ingest',
+        description: 'Ingest existing course materials (PDFs, markdown, transcripts, URLs) to extract learning outcomes and concepts',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            pdf_paths: {
+              type: 'array',
+              items: { type: 'string' },
+              description: 'Paths to PDF files with learning outcomes or course descriptions'
+            },
+            markdown_paths: {
+              type: 'array',
+              items: { type: 'string' },
+              description: 'Paths to markdown files with course content or notes'
+            },
+            text_paths: {
+              type: 'array',
+              items: { type: 'string' },
+              description: 'Paths to text files (transcripts, notes)'
+            },
+            urls: {
+              type: 'array',
+              items: { type: 'string' },
+              description: 'URLs to web pages with relevant course content'
+            }
+          }
+        }
+      },
+      {
+        name: 'coursekit.themes',
+        description: 'Extract and cluster learning themes from ingested materials and constitution',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            source: {
+              type: 'string',
+              enum: ['materials', 'both'],
+              default: 'materials',
+              description: 'Source for theme extraction'
+            },
+            granularity: {
+              type: 'string',
+              enum: ['coarse', 'medium', 'fine'],
+              default: 'medium',
+              description: 'Theme clustering granularity (coarse: 5-8 themes, medium: 8-12, fine: 12+)'
+            }
+          }
+        }
+      },
+      {
         name: 'coursekit.constitution',
         description: 'Create or update course development principles and guidelines',
         inputSchema: {
           type: 'object',
           properties: {
-            vision: { 
+            vision: {
               type: 'string',
               description: 'High-level vision for the course/workshop'
             }
@@ -2182,6 +2495,21 @@ server.register('tools/list', async () => {
           },
           required: ['task']
         }
+      },
+      {
+        name: 'coursekit.research',
+        description: 'Review identified research needs and get guidance for addressing knowledge gaps in the plan',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            filter: {
+              type: 'string',
+              enum: ['all', 'critical', 'high', 'medium', 'low'],
+              default: 'all',
+              description: 'Filter research needs by priority level'
+            }
+          }
+        }
       }
     ]
   };
@@ -2190,8 +2518,12 @@ server.register('tools/list', async () => {
 server.register('tools/call', async (params) => {
   const { name, arguments: args } = params;
   await courseKit.loadProject();
-  
+
   switch(name) {
+    case 'coursekit.ingest':
+      return await courseKit.handleIngest(args);
+    case 'coursekit.themes':
+      return await courseKit.handleThemes(args);
     case 'coursekit.constitution':
       return await courseKit.handleConstitution(args);
     case 'coursekit.specify':
@@ -2202,6 +2534,8 @@ server.register('tools/call', async (params) => {
       return await courseKit.handleTasks(args);
     case 'coursekit.implement':
       return await courseKit.handleImplement(args);
+    case 'coursekit.research':
+      return await courseKit.handleResearch(args);
     default:
       throw new Error(`Unknown tool: ${name}`);
   }

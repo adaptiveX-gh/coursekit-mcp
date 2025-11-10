@@ -1,0 +1,360 @@
+{
+  "brief_metadata": {
+    "created_date": "2025-10-19",
+    "course_title": "From course_outline.json",
+    "video_source": "YouTube URL or video identifier",
+    "outline_version": "Reference to course_outline.json version",
+    "brief_version": "1.0",
+    "author": "Your name"
+  },
+
+  "video_metadata": {
+    "url": "https://youtube.com/watch?v=...",
+    "title": "Video Title",
+    "duration": "45:23",
+    "presenter": "Presenter Name",
+    "publication_date": "2024-06-15",
+    "transcript_available": true,
+    "quality_assessment": "high|medium|low and why"
+  },
+
+  "modules": [
+    {
+      "module_number": 1,
+      "module_title": "From course_outline.json",
+      "module_description": "From course_outline.json",
+      "estimated_hours": 8,
+
+      "sections": [
+        {
+          "section_number": 1,
+          "section_title": "From course_outline.json",
+          "learning_objectives": [
+            "From course_outline.json",
+            "Learning objective 2",
+            "Learning objective 3"
+          ],
+
+          "core_content": {
+            "key_points": [
+              "Main point 1 (source: outline theme)",
+              "Main point 2 (source: video timestamp 12:34)",
+              "Main point 3 (synthesis of outline + video)",
+              "Main point 4 (identified gap needing research)"
+            ],
+
+            "definitions": {
+              "Term 1": "Definition (source: outline|video|both)",
+              "Term 2": "Definition with context"
+            },
+
+            "concepts_to_explain": [
+              {
+                "concept": "Concept Name",
+                "current_understanding": "What we know from outline/video",
+                "explanation_approach": "How to teach this (from video insights or pedagogy)",
+                "depth_needed": "basic|intermediate|advanced",
+                "source": "outline|video|synthesis"
+              }
+            ],
+
+            "frameworks_or_models": [
+              {
+                "name": "Framework Name",
+                "description": "Brief description",
+                "source": "video timestamp 23:45 | outline theme 2",
+                "application": "How to use in presentation"
+              }
+            ]
+          },
+
+          "examples_and_applications": {
+            "from_video": [
+              {
+                "example": "Description of example from video",
+                "timestamp": "12:34",
+                "topics_illustrated": ["Topic A", "Topic B"],
+                "effectiveness": "Why this example works well",
+                "adaptation_needed": "How to adapt for this course",
+                "application_in_presentation": "Where and how to use this"
+              }
+            ],
+
+            "from_outline": [
+              {
+                "example": "Example suggested by outline themes",
+                "topics_illustrated": ["Topic C"],
+                "source": "themes.json - Theme 2",
+                "development_needed": "What needs to be added or researched"
+              }
+            ],
+
+            "needed": [
+              "Additional example for scenario X (to research in Stage 4)",
+              "Case study for context Y (to research in Stage 4)",
+              "Practical application for skill Z (to research in Stage 4)"
+            ]
+          },
+
+          "teaching_guidance": {
+            "approach": "How to present this section (from video pedagogy or educational design)",
+
+            "sequence": [
+              "Step 1: Start with concrete example",
+              "Step 2: Introduce concept",
+              "Step 3: Explain framework",
+              "Step 4: Practice application"
+            ],
+
+            "analogies_and_metaphors": [
+              {
+                "analogy": "Description of analogy",
+                "source": "video timestamp 15:30 | original",
+                "when_to_use": "At start of section to establish intuition"
+              }
+            ],
+
+            "common_misconceptions": [
+              {
+                "misconception": "Students often think X",
+                "reality": "But actually Y",
+                "how_to_address": "Approach from video or recommended strategy",
+                "source": "video timestamp 34:56 | pedagogical knowledge"
+              }
+            ],
+
+            "teaching_techniques": [
+              {
+                "technique": "Progressive disclosure | Worked example | Think-pair-share | etc.",
+                "context": "When/where to use in this section",
+                "source": "Observed in video | educational best practice"
+              }
+            ],
+
+            "pacing_guidance": {
+              "estimated_time": "From outline",
+              "time_breakdown": {
+                "introduction": "10 minutes",
+                "core_concepts": "30 minutes",
+                "examples": "15 minutes",
+                "practice": "15 minutes"
+              },
+              "flexible_elements": "What can be shortened if time is limited",
+              "extension_opportunities": "What to add if time permits"
+            },
+
+            "engagement_strategies": [
+              "Interactive element 1",
+              "Question to pose to learners",
+              "Quick check-for-understanding"
+            ]
+          },
+
+          "visual_suggestions": [
+            {
+              "type": "diagram|chart|table|screenshot|animation|photo",
+              "description": "What should be visualized",
+              "purpose": "Why this visual is needed",
+              "content_details": "Specific elements to include",
+              "source_inspiration": "video timestamp 20:15 | outline concept | original"
+            }
+          ],
+
+          "research_needs": [
+            {
+              "need": "Specific research requirement",
+              "priority": "high|medium|low",
+              "type": "data|example|explanation|current_information|alternative_perspective",
+              "why_needed": "How this will enhance the presentation",
+              "suggested_sources": "Where to look (if known)"
+            },
+            {
+              "need": "Current statistics on adoption rates",
+              "priority": "high",
+              "type": "data",
+              "why_needed": "To establish relevance and context in introduction",
+              "suggested_sources": "Industry reports, research institutions"
+            }
+          ],
+
+          "assessment_opportunities": [
+            {
+              "type": "formative|summative",
+              "format": "quiz|exercise|discussion|project|presentation",
+              "description": "What to assess",
+              "timing": "When in the section",
+              "from_outline": true
+            }
+          ],
+
+          "notes": [
+            "Any additional observations about this section",
+            "Concerns or questions to address",
+            "Ideas for enhancement"
+          ]
+        },
+
+        {
+          "section_number": 2,
+          "section_title": "Second Section Title",
+          "learning_objectives": ["Objective 1", "Objective 2"],
+
+          "core_content": {
+            "key_points": ["Point 1", "Point 2"],
+            "definitions": {},
+            "concepts_to_explain": [],
+            "frameworks_or_models": []
+          },
+
+          "examples_and_applications": {
+            "from_video": [],
+            "from_outline": [],
+            "needed": []
+          },
+
+          "teaching_guidance": {
+            "approach": "Teaching approach",
+            "sequence": [],
+            "analogies_and_metaphors": [],
+            "common_misconceptions": [],
+            "teaching_techniques": [],
+            "pacing_guidance": {
+              "estimated_time": "3 hours",
+              "time_breakdown": {},
+              "flexible_elements": "",
+              "extension_opportunities": ""
+            },
+            "engagement_strategies": []
+          },
+
+          "visual_suggestions": [],
+
+          "research_needs": [],
+
+          "assessment_opportunities": [],
+
+          "notes": []
+        }
+      ],
+
+      "module_summary": {
+        "integration_notes": "How sections connect within this module",
+        "key_takeaways": ["Takeaway 1", "Takeaway 2"],
+        "connections_to_other_modules": "How this module relates to others"
+      }
+    },
+
+    {
+      "module_number": 2,
+      "module_title": "Second Module Title",
+      "module_description": "Description",
+      "estimated_hours": 10,
+
+      "sections": [
+        {
+          "section_number": 1,
+          "section_title": "Module 2, Section 1",
+          "learning_objectives": ["Objective 1"],
+
+          "core_content": {
+            "key_points": [],
+            "definitions": {},
+            "concepts_to_explain": [],
+            "frameworks_or_models": []
+          },
+
+          "examples_and_applications": {
+            "from_video": [],
+            "from_outline": [],
+            "needed": []
+          },
+
+          "teaching_guidance": {
+            "approach": "",
+            "sequence": [],
+            "analogies_and_metaphors": [],
+            "common_misconceptions": [],
+            "teaching_techniques": [],
+            "pacing_guidance": {
+              "estimated_time": "2.5 hours",
+              "time_breakdown": {},
+              "flexible_elements": "",
+              "extension_opportunities": ""
+            },
+            "engagement_strategies": []
+          },
+
+          "visual_suggestions": [],
+          "research_needs": [],
+          "assessment_opportunities": [],
+          "notes": []
+        }
+      ],
+
+      "module_summary": {
+        "integration_notes": "",
+        "key_takeaways": [],
+        "connections_to_other_modules": ""
+      }
+    }
+  ],
+
+  "overall_research_priorities": [
+    {
+      "priority": 1,
+      "need": "High-priority research need",
+      "rationale": "Why this is critical",
+      "applies_to_modules": [1, 2],
+      "estimated_research_time": "2 hours"
+    },
+    {
+      "priority": 2,
+      "need": "Second priority research need",
+      "rationale": "Why this is important",
+      "applies_to_modules": [3],
+      "estimated_research_time": "1 hour"
+    }
+  ],
+
+  "content_gaps": [
+    {
+      "gap": "Description of gap",
+      "location": "Module X, Section Y",
+      "severity": "critical|significant|minor",
+      "how_to_address": "Research | Additional video analysis | Subject matter expert consultation",
+      "notes": "Additional context"
+    }
+  ],
+
+  "video_integration_summary": {
+    "alignment_quality": "excellent|good|fair|poor",
+    "strengths": [
+      "What the video contributed well",
+      "Effective teaching techniques observed"
+    ],
+    "limitations": [
+      "What the video didn't cover",
+      "Misalignments with outline"
+    ],
+    "overall_value": "Assessment of how useful the video was"
+  },
+
+  "next_steps": {
+    "stage_4_research": {
+      "estimated_time": "Total research time needed",
+      "key_focus_areas": ["Focus 1", "Focus 2"],
+      "source_types_needed": ["academic", "industry", "practical"]
+    },
+    "stage_5_generation": {
+      "estimated_slides": "Rough estimate",
+      "special_requirements": ["Requirement 1", "Requirement 2"],
+      "visual_assets_needed": 15
+    }
+  },
+
+  "brief_notes": [
+    "Overall observations about the brief",
+    "Concerns or questions for later stages",
+    "Ideas for presentation innovation"
+  ]
+}

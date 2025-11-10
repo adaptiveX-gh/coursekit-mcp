@@ -1,0 +1,100 @@
+{
+  "themes": [
+    {
+      "theme_name": "Business Agility Foundations",
+      "description": "Core concepts of business agility including VUCA environment drivers, values, principles, and the case for change",
+      "learning_outcomes": [
+        "Illustrate the core foundational concepts of Business Agility in relevant business contexts",
+        "Clarify values and principles and why they are important enablers of building organizational intelligence",
+        "Describe the role of values and principles in cultivating new ways of thinking and working",
+        "Convey that critical success factors include trust, safety, collaboration, cohesion, autonomy, mastery and purpose as well as new levels of individual accountability and responsibility",
+        "Grasp why and how to shift focus from outputs to outcomes by eliminating waste, doing less and accelerating innovation",
+        "Communicate why creating disruptive outcomes in today's volatile economy requires real-time knowledge generation as well as radical new ways of thinking and working"
+      ],
+      "bloom_levels": ["understand", "apply", "analyze"],
+      "estimated_hours": 2
+    },
+    {
+      "theme_name": "Vision, Purpose and Strategic Focus",
+      "description": "Creating compelling visions, clarity of purpose, and understanding customers and stakeholders",
+      "learning_outcomes": [
+        "Communicate the importance of aligning organizations around a crisp, believable, compelling and inspiring vision",
+        "Experience methods for creating such visions and clear purposes",
+        "Envision the future state of business agility, then learn ways to look backwards from that future to craft a compelling path",
+        "Gain an understanding of why and how to use this activity with their teams",
+        "Explain the values, principles, tools and techniques needed to develop empathy and improve awareness of customer and stakeholder context",
+        "Apply tools such as persona maps, customer journey maps, empathy maps, customer value propositions, business model canvas"
+      ],
+      "bloom_levels": ["understand", "apply", "create"],
+      "estimated_hours": 3
+    },
+    {
+      "theme_name": "Agile Mindset and Mental Models",
+      "description": "Developing growth mindset, recognizing blind spots, understanding complexity, and managing polarities",
+      "learning_outcomes": [
+        "Describe the attributes of a growth mindset in contrast to the limitations of a fixed mindset in the Business Agility context",
+        "Introduce the concept of reframing failure as an opportunity to learn",
+        "Recognize that blind spots and mental biases exist and understand the role that our mental models play",
+        "Apply the skills needed to examine mental models and how individuals make meaning",
+        "Provide an overview of the field of complex adaptive systems and complexity theory",
+        "Provide practical awareness of relevant management models (systems dynamics, Complex Adaptive Systems, Cynefin, Theory of Constraints)",
+        "Distinguish polarities (dilemmas, paradigms and paradoxes) from traditional problems",
+        "Learn to see the relationship between the poles with the goal of optimizing the wins and minimizing the losses"
+      ],
+      "bloom_levels": ["understand", "apply", "analyze"],
+      "estimated_hours": 3
+    },
+    {
+      "theme_name": "Agile Behaviors and Practices",
+      "description": "High-performance questions, making value visible, experimentation, and change management",
+      "learning_outcomes": [
+        "Define high-performance questions, give examples of the power they have towards enhancing organizational outcomes",
+        "Discuss techniques for using them as often as possible in day-to-day conversations",
+        "Emphasize that value is only delivered through the completion of a new or improved functional slice of work that is implemented and delivered to a customer for use",
+        "Understand why and how to identify small, discrete opportunities, then craft hypotheses in order to frame relevant experiments",
+        "Understand why and how rapid experimentation accelerates learning and business agility",
+        "Experience the complex dynamics involved when creating sustainable change and the reason why individuals and organizations deeply resist it",
+        "Understand lean change practices and why co-creating change is essential",
+        "Describe and discuss change frameworks, polarity management frameworks and what makes them effective"
+      ],
+      "bloom_levels": ["understand", "apply", "create"],
+      "estimated_hours": 3
+    },
+    {
+      "theme_name": "Frameworks and Methods",
+      "description": "Lean systems thinking, lean startup, design thinking, kanban, and iterative frameworks",
+      "learning_outcomes": [
+        "Learn why a lack of end-to-end systems thinking and a failure to focus on value throughout the organization leads to waste and ineffective outcomes",
+        "Understand how a Lean Systems Approach enables business agility by focusing on strategic goals, measuring value, and eliminating waste",
+        "Introduce concepts and applications of the Build - Measure - Learn framework for dealing with uncertainty",
+        "Learn about minimal viable product, thin slices and benefits of failing fast to succeed sooner",
+        "Apply the concepts of design thinking and focus on new ways of thinking about elements of a product or solution that evolve around the customer",
+        "Provide an understanding of the key values and practices of kanban, along with ideas on why and how to apply these values",
+        "Understand and use iterative frameworks and how they accelerate learning and discovery"
+      ],
+      "bloom_levels": ["understand", "apply"],
+      "estimated_hours": 4
+    },
+    {
+      "theme_name": "Sustaining Business Agility",
+      "description": "Creating optimal environments, continuous learning, reinvention, and measures of success",
+      "learning_outcomes": [
+        "Analyze what a business agility environment and learning ecosystem looks like and why it is vital in a VUCA world",
+        "Devise strategies to create an environment that enables value creation, rapid decision making and optimized execution",
+        "Reflect on and synthesize key learnings in the unique context of each participant's experience, work structures and challenges",
+        "Extend Business Agility mastery and learning beyond the course",
+        "Identify and explain ways in which the participants can make the ongoing application of business agility part of the habitual way of working",
+        "Communicate the importance of learning agility and how empirical data and relevant, actionable metrics support real learning",
+        "Understand limitations of lagging indicators and excessive metrics that do not drive the right behaviors"
+      ],
+      "bloom_levels": ["analyze", "evaluate", "create"],
+      "estimated_hours": 2
+    }
+  ],
+  "metadata": {
+    "source_pdf": "d:\\Users\\scale\\Code\\course-builder-CLI\\in\\learning-outcomes.pdf",
+    "extraction_date": "2025-10-19T00:00:00",
+    "total_outcomes": 44,
+    "total_themes": 6
+  }
+}

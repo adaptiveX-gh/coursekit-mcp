@@ -18,7 +18,11 @@
       "Bash(for file in gamma-integration.test.js mocks/*.js fixtures/*.json)",
       "Bash(done)",
       "Bash(npm test)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(python:*)",
+      "Bash(npm install:*)",
+      "Bash(cat:*)",
+      "Bash(npm run test:pdf:*)"
     ],
     "deny": [],
     "ask": []

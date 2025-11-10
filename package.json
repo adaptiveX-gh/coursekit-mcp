@@ -10,6 +10,7 @@
     "test": "node test.js",
     "test:integration": "node test/gamma-integration.test.js",
     "test:config": "node config/ConfigurationManager.test.js",
+    "test:pdf": "node lib/ingest/pdf-processor.test.js",
     "config:example": "node config/example-usage.js"
   },
   "keywords": [
@@ -22,7 +23,9 @@
   ],
   "author": "Carlos",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "pdf-parse": "^2.4.5"
+  },
   "devDependencies": {
     "@types/node": "^20.0.0"
   }

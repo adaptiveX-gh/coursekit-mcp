@@ -1,0 +1,47 @@
+{
+  "themes": [
+    {
+      "theme_id": "theme_1",
+      "theme_name": "Example Theme Name",
+      "description": "Description of what this theme covers",
+      "learning_outcomes": [
+        "First learning outcome for this theme",
+        "Second learning outcome for this theme",
+        "Third learning outcome for this theme"
+      ],
+      "bloom_levels": [
+        "understand",
+        "apply",
+        "create"
+      ],
+      "estimated_hours": 3.5,
+      "keywords": [
+        "keyword1",
+        "keyword2",
+        "keyword3"
+      ],
+      "confidence": "high",
+      "related_concepts": [
+        "Related concept 1",
+        "Related concept 2"
+      ],
+      "related_topics": [
+        "Related topic 1"
+      ],
+      "source_materials": [
+        "path/to/source1.md",
+        "path/to/source2.pdf"
+      ],
+      "alignment_notes": [
+        "Fully aligned with constitutional principles"
+      ]
+    }
+  ],
+  "metadata": {
+    "totalOutcomes": 0,
+    "themesGenerated": 0,
+    "alignmentScore": 100,
+    "synthesizedAt": "2025-11-09T00:00:00.000Z"
+  },
+  "warnings": []
+}
