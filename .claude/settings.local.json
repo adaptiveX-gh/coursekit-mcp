@@ -23,7 +23,8 @@
       "Bash(npm install:*)",
       "Bash(cat:*)",
       "Bash(npm run test:pdf:*)",
-      "Skill(content-auditor)"
+      "Skill(content-auditor)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []
